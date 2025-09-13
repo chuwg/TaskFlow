@@ -9,7 +9,7 @@ interface TextProps {
   variant?: keyof typeof fontConfig;
   color?: string;
   align?: 'auto' | 'left' | 'right' | 'center' | 'justify';
-  style?: TextStyle;
+  style?: TextStyle | TextStyle[];
   numberOfLines?: number;
 }
 

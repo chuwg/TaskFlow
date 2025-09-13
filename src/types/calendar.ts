@@ -1,6 +1,6 @@
-import type { Todo } from './todo';
-import type { Transaction } from './finance';
-import type { Note } from './note';
+import type { Todo } from './todo.js';
+import type { Transaction } from './finance.js';
+import type { Note } from './note.js';
 
 export type CalendarViewMode = 'month' | 'week' | 'day' | 'agenda';
 

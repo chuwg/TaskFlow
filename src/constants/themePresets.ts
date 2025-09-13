@@ -1,5 +1,5 @@
 import type { ThemePreset } from '@/types/theme';
-import { palette } from './colors';
+import { palette } from './colors.js';
 
 export const themePresets: ThemePreset[] = [
   {

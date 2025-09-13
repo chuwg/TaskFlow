@@ -13,8 +13,8 @@ import {
   Surface,
 } from 'react-native-paper';
 import { useTheme } from '@/hooks/useTheme';
-import { ColorPicker } from './ColorPicker';
-import { ThemePresetPicker } from './ThemePresetPicker';
+import { ColorPicker } from './ColorPicker.js';
+import { ThemePresetPicker } from './ThemePresetPicker.js';
 import type { ThemeMode } from '@/types/theme';
 
 export const ThemeSettings = () => {

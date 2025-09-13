@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { Surface, TouchableRipple } from 'react-native-paper';
 import { useTheme } from '@/hooks/useTheme';
-import { Text } from '../typography/Text';
+import { Text } from '../typography/Text.js';
 import type { ThemePreset } from '@/types/theme';
 
 interface ThemePresetListProps {

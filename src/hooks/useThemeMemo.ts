@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useTheme } from './useTheme';
+import { useTheme } from './useTheme.js';
 import type { CustomTheme } from '@/types/theme';
 
 type StyleGenerator<T> = (theme: CustomTheme) => T;

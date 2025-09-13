@@ -3,7 +3,7 @@ import type { CalendarEvent } from '@/types/calendar';
 import type { Todo } from '@/types/todo';
 import type { Transaction } from '@/types/finance';
 import type { Note } from '@/types/note';
-import { useCalendar } from './useCalendar';
+import { useCalendar } from './useCalendar.js';
 
 export const useCalendarIntegration = () => {
   const {

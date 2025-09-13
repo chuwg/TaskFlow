@@ -12,7 +12,7 @@ const STORAGE_KEYS = {
 export const ThemeStorage = {
   async getThemeMode(): Promise<ThemeMode | null> {
     try {
-      const mode = await AsyncStorage.getItem(STORAGE_KEYS.THEME_MODE);
+      const mode = await (AsyncStorage as any).getItem(STORAGE_KEYS.THEME_MODE);
       return mode as ThemeMode | null;
     } catch (error) {
       console.error('Failed to get theme mode:', error);
@@ -22,7 +22,7 @@ export const ThemeStorage = {
 
   async setThemeMode(mode: ThemeMode): Promise<void> {
     try {
-      await AsyncStorage.setItem(STORAGE_KEYS.THEME_MODE, mode);
+      await (AsyncStorage as any).setItem(STORAGE_KEYS.THEME_MODE, mode);
     } catch (error) {
       console.error('Failed to save theme mode:', error);
     }
@@ -30,7 +30,7 @@ export const ThemeStorage = {
 
   async getPrimaryColor(): Promise<string | null> {
     try {
-      return await AsyncStorage.getItem(STORAGE_KEYS.PRIMARY_COLOR);
+      return await (AsyncStorage as any).getItem(STORAGE_KEYS.PRIMARY_COLOR);
     } catch (error) {
       console.error('Failed to get primary color:', error);
       return null;
@@ -39,7 +39,7 @@ export const ThemeStorage = {
 
   async setPrimaryColor(color: string): Promise<void> {
     try {
-      await AsyncStorage.setItem(STORAGE_KEYS.PRIMARY_COLOR, color);
+      await (AsyncStorage as any).setItem(STORAGE_KEYS.PRIMARY_COLOR, color);
     } catch (error) {
       console.error('Failed to save primary color:', error);
     }
@@ -47,7 +47,7 @@ export const ThemeStorage = {
 
   async getThemePresets(): Promise<ThemePreset[] | null> {
     try {
-      const presetsJson = await AsyncStorage.getItem(STORAGE_KEYS.THEME_PRESETS);
+      const presetsJson = await (AsyncStorage as any).getItem(STORAGE_KEYS.THEME_PRESETS);
       return presetsJson ? JSON.parse(presetsJson) : null;
     } catch (error) {
       console.error('Failed to get theme presets:', error);
@@ -57,7 +57,7 @@ export const ThemeStorage = {
 
   async setThemePresets(presets: ThemePreset[]): Promise<void> {
     try {
-      await AsyncStorage.setItem(STORAGE_KEYS.THEME_PRESETS, JSON.stringify(presets));
+      await (AsyncStorage as any).setItem(STORAGE_KEYS.THEME_PRESETS, JSON.stringify(presets));
     } catch (error) {
       console.error('Failed to save theme presets:', error);
     }
@@ -65,7 +65,7 @@ export const ThemeStorage = {
 
   async getCurrentPreset(): Promise<ThemePreset | null> {
     try {
-      const presetJson = await AsyncStorage.getItem(STORAGE_KEYS.CURRENT_PRESET);
+      const presetJson = await (AsyncStorage as any).getItem(STORAGE_KEYS.CURRENT_PRESET);
       return presetJson ? JSON.parse(presetJson) : null;
     } catch (error) {
       console.error('Failed to get current preset:', error);
@@ -75,7 +75,7 @@ export const ThemeStorage = {
 
   async setCurrentPreset(preset: ThemePreset): Promise<void> {
     try {
-      await AsyncStorage.setItem(STORAGE_KEYS.CURRENT_PRESET, JSON.stringify(preset));
+      await (AsyncStorage as any).setItem(STORAGE_KEYS.CURRENT_PRESET, JSON.stringify(preset));
     } catch (error) {
       console.error('Failed to save current preset:', error);
     }
@@ -83,7 +83,7 @@ export const ThemeStorage = {
 
   async getUseSystemFont(): Promise<boolean | null> {
     try {
-      const value = await AsyncStorage.getItem(STORAGE_KEYS.USE_SYSTEM_FONT);
+      const value = await (AsyncStorage as any).getItem(STORAGE_KEYS.USE_SYSTEM_FONT);
       return value ? JSON.parse(value) : null;
     } catch (error) {
       console.error('Failed to get system font setting:', error);
@@ -93,7 +93,7 @@ export const ThemeStorage = {
 
   async setUseSystemFont(useSystemFont: boolean): Promise<void> {
     try {
-      await AsyncStorage.setItem(
+      await (AsyncStorage as any).setItem(
         STORAGE_KEYS.USE_SYSTEM_FONT,
         JSON.stringify(useSystemFont)
       );

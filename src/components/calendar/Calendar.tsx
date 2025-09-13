@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { CalendarHeader } from './CalendarHeader';
-import { CalendarGrid } from './CalendarGrid';
+import { CalendarHeader } from './CalendarHeader.js';
+import { CalendarGrid } from './CalendarGrid.js';
 import type { CalendarViewMode, CalendarEvent } from '@/types/calendar';
 import {
   generateMonthInfo,

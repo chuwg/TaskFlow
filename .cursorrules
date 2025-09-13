@@ -1,0 +1,121 @@
+# TaskFlow Project Cursor Rules
+
+## TypeScript Configuration Rules
+
+### Module Resolution
+- Always use `"moduleResolution": "node16"` for modern TypeScript projects
+- This prevents errors with customConditions and modern module features
+- Required for proper path alias resolution and package exports
+
+### ESM Module System
+- Project uses `"type": "module"` in package.json
+- All relative imports MUST include `.js` extension (e.g., `import { Component } from './Component.js'`)
+- Never use `.ts` or `.tsx` extensions in import statements
+- Use `import type` for type-only imports
+
+## Import/Export Rules
+
+### Path Aliases
+- Use `@/` prefix for src directory imports
+- Configured aliases: `@components`, `@hooks`, `@types`, `@services`, `@utils`
+- Ensure both TypeScript (tsconfig.json) and Metro (metro.config.js) have matching alias configurations
+
+### Relative Imports
+- Always use `.js` extension for relative imports
+- Example: `import { useTheme } from './useTheme.js'`
+- Never use: `import { useTheme } from './useTheme'`
+
+### Type Imports
+- Use `import type` for type-only imports
+- Example: `import type { ThemePreset } from '@/types/theme'`
+- Never mix value and type imports in the same statement
+
+## Component Naming Rules
+
+### Avoid Name Collisions
+- Never use the same name for both a type and a component
+- If collision occurs, rename the component (e.g., `TodoStats` type → `TodoStatsComponent`)
+- Use descriptive suffixes for components when needed
+
+### React Native Paper Integration
+- Always use aliases for React Native Paper components to avoid conflicts
+- Example: `import { Button as PaperButton } from 'react-native-paper'`
+- Use custom components with different names (e.g., `Button` component vs `PaperButton`)
+
+## AsyncStorage Usage
+
+### Type Safety
+- Use consistent typing pattern: `(AsyncStorage as any).getItem(key)`
+- Or create proper type definitions:
+```typescript
+interface AsyncStorageType {
+  getItem: (key: string) => Promise<string | null>;
+  setItem: (key: string, value: string) => Promise<void>;
+}
+const storage = AsyncStorage as AsyncStorageType;
+```
+
+## Theme System Rules
+
+### Typography Configuration
+- All typography objects MUST include `fontWeight` property
+- Use consistent font weights: '400' for regular, '500' for medium
+- Never duplicate properties in theme objects
+
+### Type Definitions
+- Extend `ThemeTypography` interface to include `fontWeight: string`
+- Ensure all theme objects match the interface requirements
+
+## Error Prevention Checklist
+
+### Before Adding New Files
+1. Check for existing type/component name conflicts
+2. Ensure proper import/export structure
+3. Use correct file extensions (.js for imports)
+4. Configure path aliases if needed
+
+### Before Modifying Existing Files
+1. Verify import paths are correct
+2. Check for type compatibility
+3. Ensure no naming conflicts
+4. Test AsyncStorage usage patterns
+
+### Common Pitfalls to Avoid
+- Don't mix CommonJS and ESM syntax
+- Don't forget `.js` extensions in relative imports
+- Don't use same names for types and components
+- Don't skip `fontWeight` in typography objects
+- Don't use direct AsyncStorage without type assertions
+
+## Code Quality Standards
+
+### Type Safety
+- Always use proper TypeScript types
+- Avoid `any` type unless absolutely necessary
+- Use type assertions carefully and consistently
+
+### Import Organization
+- Group imports: React, third-party, local components, types
+- Use consistent import style throughout the project
+- Prefer named imports over default imports
+
+### Error Handling
+- Always handle AsyncStorage errors with try-catch
+- Provide meaningful error messages
+- Use consistent error handling patterns
+
+## Development Workflow
+
+### Before Committing
+1. Run TypeScript compiler check: `npx tsc --noEmit`
+2. Verify all imports resolve correctly
+3. Check for any naming conflicts
+4. Ensure theme objects have all required properties
+
+### When Adding New Features
+1. Create proper type definitions first
+2. Use consistent naming conventions
+3. Follow established import/export patterns
+4. Test with existing codebase
+
+This configuration ensures a stable, maintainable TypeScript + React Native project with proper ESM support and type safety.

@@ -12,8 +12,8 @@ const TempScreen = ({ name }: { name: string }) => (
 );
 
 import { CalendarScreen } from '@/screens/CalendarScreen';
-const TodoScreen = () => <TempScreen name="Todo" />;
-const FinanceScreen = () => <TempScreen name="Finance" />;
+import { TodoScreen } from '@/screens/TodoScreen';
+import { FinanceScreen } from '@/screens/FinanceScreen';
 const NotesScreen = () => <TempScreen name="Notes" />;
 
 // 설정 화면

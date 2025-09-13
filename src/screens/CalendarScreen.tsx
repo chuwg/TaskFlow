@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Portal, FAB, Dialog } from 'react-native-paper';
 import { useTheme } from '@/hooks/useTheme';
-import { useCalendar } from '@/hooks/useCalendar';
+import { useCalendarContext } from '@/contexts/CalendarContext';
 import { Calendar } from '@/components/calendar/Calendar';
 import { EventList } from '@/components/calendar/EventList';
 import { EventForm } from '@/components/calendar/EventForm';
@@ -12,22 +12,23 @@ import type { CalendarEvent } from '@/types/calendar';
 export const CalendarScreen = () => {
   const { theme } = useTheme();
   const {
-    events,
-    currentDate,
-    selectedDate,
+    state,
     addEvent,
     updateEvent,
     deleteEvent,
-    navigateToDate,
-  } = useCalendar();
+    getEventsForDate,
+    setSelectedDate,
+  } = useCalendarContext();
+  
+  const { events, viewState } = state;
+  const { selectedDate } = viewState;
 
   const [isAddEventVisible, setIsAddEventVisible] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
   const [isEventDetailsVisible, setIsEventDetailsVisible] = useState(false);
 
-  const handleAddEvent = (eventData: Partial<CalendarEvent>) => {
-    const newEvent: CalendarEvent = {
-      id: Date.now().toString(),
+  const handleAddEvent = async (eventData: Partial<CalendarEvent>) => {
+    const newEventData = {
       title: eventData.title || '',
       description: eventData.description || '',
       startDate: eventData.startDate || new Date(),
@@ -35,10 +36,13 @@ export const CalendarScreen = () => {
       type: eventData.type || 'custom',
       location: eventData.location,
       allDay: eventData.allDay || false,
-      color: theme.colors.primary,
+      color: eventData.color || theme.colors.primary,
+      tags: eventData.tags || [],
+      reminder: eventData.reminder || false,
+      reminderTime: eventData.reminderTime,
     };
 
-    addEvent(newEvent);
+    await addEvent(newEventData);
     setIsAddEventVisible(false);
   };
 
@@ -52,9 +56,9 @@ export const CalendarScreen = () => {
     setIsAddEventVisible(true);
   };
 
-  const handleDeleteEvent = () => {
+  const handleDeleteEvent = async () => {
     if (selectedEvent) {
-      deleteEvent(selectedEvent.id);
+      await deleteEvent(selectedEvent.id);
       setSelectedEvent(null);
       setIsEventDetailsVisible(false);
     }
@@ -64,15 +68,12 @@ export const CalendarScreen = () => {
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Calendar
         events={events}
-        onSelectDate={navigateToDate}
+        onSelectDate={setSelectedDate}
         onEventPress={handleEventPress}
       />
 
       <EventList
-        events={events.filter(
-          (event) =>
-            event.startDate.toDateString() === selectedDate?.toDateString()
-        )}
+        events={selectedDate ? getEventsForDate(selectedDate) : []}
         onEventPress={handleEventPress}
       />
 

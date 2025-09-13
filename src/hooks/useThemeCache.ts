@@ -1,5 +1,5 @@
 import { useRef, useCallback } from 'react';
-import { useTheme } from './useTheme';
+import { useTheme } from './useTheme.js';
 import type { CustomTheme } from '@/types/theme';
 
 interface CacheEntry<T> {
@@ -26,7 +26,9 @@ export const useThemeCache = <T>() => {
       // 캐시 크기 제한
       if (cache.size > 100) {
         const firstKey = cache.keys().next().value;
-        cache.delete(firstKey);
+        if (firstKey) {
+          cache.delete(firstKey);
+        }
       }
 
       return value;

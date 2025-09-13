@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
-import { useTheme } from './useTheme';
+import { useTheme } from './useTheme.js';
 
 interface AnimatedThemeValues {
   backgroundColor: Animated.Value;

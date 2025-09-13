@@ -3,47 +3,77 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  avatar?: string;
+  preferences: UserPreferences;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-// 캘린더 관련 타입
-export interface CalendarEvent {
-  id: string;
-  title: string;
-  description: string;
-  startDate: Date;
-  endDate?: Date;
-  type: 'task' | 'expense' | 'note';
-  tags: string[];
+export interface UserPreferences {
+  theme: 'light' | 'dark' | 'auto';
+  language: string;
+  timezone: string;
+  dateFormat: string;
+  timeFormat: '12h' | '24h';
+  notifications: {
+    enabled: boolean;
+    email: boolean;
+    push: boolean;
+    reminder: boolean;
+  };
+  privacy: {
+    dataSharing: boolean;
+    analytics: boolean;
+  };
 }
 
-// 할일 관련 타입
-export interface Todo {
+// 모듈별 타입들을 re-export
+export * from './calendar.js';
+export * from './todo.js';
+export * from './finance.js';
+export * from './note.js';
+export * from './navigation.js';
+export * from './settings.js';
+export * from './theme.js';
+
+// 공통 유틸리티 타입
+export interface BaseEntity {
   id: string;
-  title: string;
-  description: string;
-  dueDate?: Date;
-  status: 'pending' | 'in_progress' | 'completed';
-  priority: 'low' | 'medium' | 'high';
-  tags: string[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-// 가계부 관련 타입
-export interface Transaction {
-  id: string;
-  type: 'income' | 'expense';
-  amount: number;
-  category: string;
-  date: Date;
-  description: string;
-  tags: string[];
+export interface PaginationParams {
+  page: number;
+  limit: number;
+  offset?: number;
 }
 
-// 노트 관련 타입
-export interface Note {
-  id: string;
-  title: string;
-  content: string;
-  created: Date;
-  modified: Date;
-  tags: string[];
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+  };
+}
+
+export interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
+}
+
+// 앱 전체 상태 타입
+export interface AppState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  lastSyncAt: Date | null;
+  offlineMode: boolean;
 }

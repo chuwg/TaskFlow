@@ -1,9 +1,9 @@
 import type { MD3Theme } from 'react-native-paper';
-import type { MD3Colors } from 'react-native-paper/lib/typescript/types';
+import type { MD3Colors } from 'react-native-paper';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 
-export interface ThemeColors extends MD3Colors {
+export interface ThemeColors {
   // 추가 상태 색상
   success: string;
   warning: string;
@@ -46,7 +46,8 @@ export interface ThemeTypography {
   fontFamily: string;
   fontSize: number;
   lineHeight: number;
-  letterSpacing?: number;
+  letterSpacing: number;
+  fontWeight: string;
 }
 
 export interface CustomTheme extends Omit<MD3Theme, 'colors'> {

@@ -28,6 +28,98 @@ tsconfig.json:
       - "Test path aliases after configuration changes"
       - "Review compiler options when upgrading TypeScript"
 
+# ESM Module System Rules
+package.json:
+  type: "module"  # Project uses ESM modules
+  rules:
+    - "All relative imports MUST include .js extension"
+    - "Never use .ts or .tsx extensions in import statements"
+    - "Use import type for type-only imports"
+    - "Ensure both TypeScript and Metro have matching alias configurations"
+
+# Import/Export Rules
+*.{ts,tsx,js,jsx}:
+  imports:
+    relative-imports:
+      - "Always use .js extension for relative imports"
+      - "Example: import { Component } from './Component.js'"
+      - "Never use: import { Component } from './Component'"
+    type-imports:
+      - "Use import type for type-only imports"
+      - "Example: import type { ThemePreset } from '@/types/theme'"
+      - "Never mix value and type imports in the same statement"
+    path-aliases:
+      - "Use @/ prefix for src directory imports"
+      - "Configured aliases: @components, @hooks, @types, @services, @utils"
+      - "Ensure both TypeScript and Metro have matching configurations"
+
+# Component Naming Rules
+*.{ts,tsx}:
+  naming:
+    avoid-collisions:
+      - "Never use same name for both type and component"
+      - "If collision occurs, rename component (e.g., TodoStats type → TodoStatsComponent)"
+      - "Use descriptive suffixes for components when needed"
+    react-native-paper:
+      - "Always use aliases for React Native Paper components"
+      - "Example: import { Button as PaperButton } from 'react-native-paper'"
+      - "Use custom components with different names"
+
+# AsyncStorage Usage Rules
+*.{ts,tsx}:
+  async-storage:
+    type-safety:
+      - "Use consistent typing pattern: (AsyncStorage as any).getItem(key)"
+      - "Or create proper type definitions with interface"
+      - "Always handle errors with try-catch"
+    patterns:
+      - "Use consistent error handling patterns"
+      - "Provide meaningful error messages"
+      - "Test AsyncStorage usage patterns"
+
+# Theme System Rules
+*.{ts,tsx}:
+  theme:
+    typography:
+      - "All typography objects MUST include fontWeight property"
+      - "Use consistent font weights: '400' for regular, '500' for medium"
+      - "Never duplicate properties in theme objects"
+    type-definitions:
+      - "Extend ThemeTypography interface to include fontWeight: string"
+      - "Ensure all theme objects match interface requirements"
+
+# Error Prevention Checklist
+*.{ts,tsx,js,jsx}:
+  before-adding-files:
+    - "Check for existing type/component name conflicts"
+    - "Ensure proper import/export structure"
+    - "Use correct file extensions (.js for imports)"
+    - "Configure path aliases if needed"
+  before-modifying-files:
+    - "Verify import paths are correct"
+    - "Check for type compatibility"
+    - "Ensure no naming conflicts"
+    - "Test AsyncStorage usage patterns"
+  common-pitfalls:
+    - "Don't mix CommonJS and ESM syntax"
+    - "Don't forget .js extensions in relative imports"
+    - "Don't use same names for types and components"
+    - "Don't skip fontWeight in typography objects"
+    - "Don't use direct AsyncStorage without type assertions"
+
+# Development Workflow
+*.{ts,tsx,js,jsx}:
+  before-committing:
+    - "Run TypeScript compiler check: npx tsc --noEmit"
+    - "Verify all imports resolve correctly"
+    - "Check for any naming conflicts"
+    - "Ensure theme objects have all required properties"
+  when-adding-features:
+    - "Create proper type definitions first"
+    - "Use consistent naming conventions"
+    - "Follow established import/export patterns"
+    - "Test with existing codebase"
+
 # Theme System Configuration
 *.{ts,tsx}:
   theme:

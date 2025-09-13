@@ -85,9 +85,8 @@ export const EventList: React.FC<EventListProps> = ({
           key={event.id}
           title={event.title}
           description={event.description}
-          left={(props) => (
+          left={() => (
             <View
-              {...props}
               style={[
                 styles.eventIndicator,
                 { backgroundColor: getEventColor(event) },

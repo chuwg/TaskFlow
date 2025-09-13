@@ -1,4 +1,4 @@
-import { NavigatorScreenParams } from "@react-navigation/native";
+import type { NavigatorScreenParams } from "@react-navigation/native";
 
 // 메인 탭 네비게이션의 파라미터 타입
 export type MainTabParamList = {

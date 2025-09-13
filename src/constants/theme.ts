@@ -1,6 +1,6 @@
 import { MD3LightTheme, MD3DarkTheme } from 'react-native-paper';
 import { Platform } from 'react-native';
-import { lightColors, darkColors } from './colors';
+import { lightColors, darkColors } from './colors.js';
 import type { CustomTheme, ThemePreset } from '@/types/theme';
 
 // 시스템 기본 폰트 사용
@@ -16,6 +16,7 @@ export const DEFAULT_TYPOGRAPHY = {
     fontSize: 57,
     lineHeight: 64,
     letterSpacing: -0.25,
+    fontWeight: '400',
   },
   displayMedium: {
     fontFamily: systemFont,
@@ -52,48 +53,56 @@ export const DEFAULT_TYPOGRAPHY = {
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.15,
+    fontWeight: '500',
   },
   titleSmall: {
     fontFamily: systemFont,
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.1,
+    fontWeight: '500',
   },
   labelLarge: {
     fontFamily: systemFont,
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.1,
+    fontWeight: '500',
   },
   labelMedium: {
     fontFamily: systemFont,
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.5,
+    fontWeight: '500',
   },
   labelSmall: {
     fontFamily: systemFont,
     fontSize: 11,
     lineHeight: 16,
     letterSpacing: 0.5,
+    fontWeight: '500',
   },
   bodyLarge: {
     fontFamily: systemFont,
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.15,
+    fontWeight: '500',
   },
   bodyMedium: {
     fontFamily: systemFont,
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0.25,
+    fontWeight: '400',
   },
   bodySmall: {
     fontFamily: systemFont,
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0.4,
+    fontWeight: '400',
   },
 };
 

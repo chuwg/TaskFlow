@@ -29,9 +29,9 @@ export const useFontScaling = () => {
     (acc, [key, value]) => ({
       ...acc,
       [key]: {
-        ...value,
-        fontSize: getScaledFontSize(value.fontSize),
-        lineHeight: getScaledLineHeight(value.lineHeight),
+        ...(value as any),
+        fontSize: getScaledFontSize((value as any).fontSize),
+        lineHeight: getScaledLineHeight((value as any).lineHeight),
       },
     }),
     {} as typeof fontConfig

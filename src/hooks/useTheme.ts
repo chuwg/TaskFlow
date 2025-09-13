@@ -70,5 +70,8 @@ export const useTheme = () => {
     applyThemePreset,
     addThemePreset,
     removeThemePreset,
+    // 직접 접근을 위한 속성들
+    colors: theme.colors,
+    spacing: theme.spacing,
   };
 };

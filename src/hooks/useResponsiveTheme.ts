@@ -1,5 +1,5 @@
-import { useTheme } from './useTheme';
-import { useResponsive } from './useResponsive';
+import { useTheme } from './useTheme.js';
+import { useResponsive } from './useResponsive.js';
 import type { CustomTheme } from '@/types/theme';
 
 export const useResponsiveTheme = () => {
