@@ -1,28 +1,66 @@
-import React from "react";
-import { StyleSheet } from "react-native";
-import { Button as PaperButton } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { Button as PaperButton } from 'react-native-paper';
+import { useTheme } from '@/hooks/useTheme';
 
 interface ButtonProps {
-  mode?: "text" | "outlined" | "contained";
+  mode?: 'text' | 'outlined' | 'contained' | 'contained-tonal';
   onPress: () => void;
   children: React.ReactNode;
   disabled?: boolean;
   loading?: boolean;
-  color?: string;
-  style?: object;
   icon?: string;
+  style?: ViewStyle;
+  size?: 'small' | 'medium' | 'large';
+  fullWidth?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  mode = "contained",
+  mode = 'contained',
   onPress,
   children,
   disabled = false,
   loading = false,
-  color,
-  style,
   icon,
+  style,
+  size = 'medium',
+  fullWidth = false,
 }) => {
+  const { theme } = useTheme();
+
+  const getButtonStyle = () => {
+    const baseStyle: ViewStyle = {
+      borderRadius: theme.radii.md,
+    };
+
+    if (fullWidth) {
+      baseStyle.width = '100%';
+    }
+
+    switch (size) {
+      case 'small':
+        baseStyle.height = 32;
+        return baseStyle;
+      case 'large':
+        baseStyle.height = 48;
+        return baseStyle;
+      default:
+        baseStyle.height = 40;
+        return baseStyle;
+    }
+  };
+
+  const getContentStyle = () => {
+    switch (size) {
+      case 'small':
+        return styles.smallContent;
+      case 'large':
+        return styles.largeContent;
+      default:
+        return styles.mediumContent;
+    }
+  };
+
   return (
     <PaperButton
       mode={mode}
@@ -30,10 +68,15 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       loading={loading}
       icon={icon}
-      style={[styles.button, style]}
-      contentStyle={styles.content}
-      labelStyle={styles.label}
-      textColor={color}
+      style={[getButtonStyle(), style]}
+      contentStyle={getContentStyle()}
+      theme={{
+        colors: {
+          primary: theme.colors.primary,
+          secondary: theme.colors.secondary,
+          error: theme.colors.error,
+        },
+      }}
     >
       {children}
     </PaperButton>
@@ -41,17 +84,16 @@ export const Button: React.FC<ButtonProps> = ({
 };
 
 const styles = StyleSheet.create({
-  button: {
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginVertical: 8,
+  smallContent: {
+    height: 32,
+    paddingHorizontal: 12,
   },
-  content: {
+  mediumContent: {
     height: 40,
+    paddingHorizontal: 16,
   },
-  label: {
-    fontSize: 16,
-    fontWeight: "600",
+  largeContent: {
+    height: 48,
+    paddingHorizontal: 24,
   },
 });

@@ -11,10 +11,13 @@ const TempScreen = ({ name }: { name: string }) => (
   </View>
 );
 
-const CalendarScreen = () => <TempScreen name="Calendar" />;
+import { CalendarScreen } from '@/screens/CalendarScreen';
 const TodoScreen = () => <TempScreen name="Todo" />;
 const FinanceScreen = () => <TempScreen name="Finance" />;
 const NotesScreen = () => <TempScreen name="Notes" />;
+
+// 설정 화면
+import { SettingsScreen } from "@/screens/SettingsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -67,6 +70,15 @@ export const MainTabNavigator = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="note-text" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cog" size={size} color={color} />
           ),
         }}
       />

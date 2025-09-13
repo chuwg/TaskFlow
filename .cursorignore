@@ -15,6 +15,45 @@ coverage/
   - noImplicitAny: true
   - strictNullChecks: true
 
+# TypeScript Module Configuration
+tsconfig.json:
+  compilerOptions:
+    moduleResolution: "node16"  # Required for modern module features
+    rules:
+      - "Always use node16 for moduleResolution in modern projects"
+      - "Required for customConditions and package exports"
+      - "Update before adding new dependencies"
+    checklist:
+      - "Verify moduleResolution is set to node16"
+      - "Test path aliases after configuration changes"
+      - "Review compiler options when upgrading TypeScript"
+
+# Theme System Configuration
+*.{ts,tsx}:
+  theme:
+    rules:
+      - "Always use useTheme hook for accessing theme values"
+      - "Implement smooth transitions for theme changes"
+      - "Support responsive spacing based on screen size"
+      - "Use dynamic font scaling"
+      - "Optimize theme calculations with memoization"
+    animation:
+      - "Use Animated API for theme transitions"
+      - "Implement fade transitions for color changes"
+      - "Add spring animations for interactive elements"
+    responsive:
+      - "Use relative units for spacing"
+      - "Implement breakpoints for different screen sizes"
+      - "Support landscape and portrait modes"
+    fonts:
+      - "Define consistent font scale"
+      - "Support dynamic type settings"
+      - "Implement custom font families"
+    debug:
+      - "Add theme inspector component"
+      - "Log theme changes in development"
+      - "Provide theme preview functionality"
+
 # Import Order Rules
 *.{ts,tsx,js,jsx}:
   import-order:
