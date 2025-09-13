@@ -1,0 +1,84 @@
+# Cursor IDE Rules
+
+# Ignore Patterns
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.env
+.DS_Store
+
+# TypeScript Configuration
+*.{ts,tsx}:
+  - strict: true
+  - noImplicitAny: true
+  - strictNullChecks: true
+
+# Import Order Rules
+*.{ts,tsx,js,jsx}:
+  import-order:
+    groups:
+      - ["react", "react-*"]
+      - ["^@/components/"]
+      - ["^@/hooks/"]
+      - ["^@/utils/"]
+      - ["^@/types/"]
+      - ["^./styles"]
+
+# Naming Conventions
+*.{ts,tsx}:
+  naming:
+    components: "^[A-Z][a-zA-Z0-9]*$"
+    hooks: "^use[A-Z][a-zA-Z0-9]*$"
+    utils: "^[a-z][a-zA-Z0-9]*$"
+    types: "^[A-Z][a-zA-Z0-9]*$"
+
+# Component Structure
+*.tsx:
+  structure:
+    order:
+      - imports
+      - interfaces/types
+      - component
+      - styles
+
+# Testing Files
+*.test.{ts,tsx}:
+  pattern: "^describe\\('.*', () => {.*})$"
+  required-imports:
+    - "@testing-library/react"
+    - "@testing-library/user-event"
+
+# Git Commit Message Format
+commit-message:
+  pattern: "^(feat|fix|docs|style|refactor|test|chore)(\\(\\w+\\))?: .+"
+  examples:
+    - "feat(todo): add drag and drop functionality"
+    - "fix(calendar): resolve sync issue"
+    - "docs: update README"
+
+# Branch Naming
+branch-name:
+  patterns:
+    feature: "^feature/[a-z0-9-]+$"
+    fix: "^fix/[a-z0-9-]+$"
+    hotfix: "^hotfix/[a-z0-9-]+$"
+    release: "^release/v\\d+\\.\\d+\\.\\d+$"
+
+# Code Style
+*.{ts,tsx,js,jsx}:
+  quotes: double
+  semi: true
+  trailingComma: all
+  tabWidth: 2
+  printWidth: 80
+  
+# Comments Language
+comments:
+  language: ko-KR
+  examples:
+    - "# 공통 컴포넌트"
+    - "# 캘린더 컴포넌트"
+    - "# 할일 컴포넌트"
+    - "# 가계부 컴포넌트"
